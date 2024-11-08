@@ -1,8 +1,9 @@
 import { useQuery, gql, useMutation } from "@apollo/client";
+import { Fragment } from "react";
 
 const FETCH_BOARDS = gql`
-  query {
-    fetchBoards {
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
       number
       writer
       title
@@ -34,13 +35,16 @@ export default function staticRoutingMovedPage() {
       variables: {
         number: Number(event.target.id),
       },
+      refetchQueries: [{ query: FETCH_BOARDS }],
     });
   };
 
   return (
     <div>
       {data?.fetchBoards.map((el) => (
-        <div>
+        // <Fragment key={el.number}>
+        // <>
+        <div key={el.number}>
           <span>
             <input type="checkbox" />
           </span>
@@ -53,6 +57,8 @@ export default function staticRoutingMovedPage() {
             </button>
           </span>
         </div>
+        // </>
+        // </Fragment>
       ))}
     </div>
   );
