@@ -3,6 +3,9 @@ module.exports = {
     browser: true,
     es2021: true,
   },
+  globals: {
+    JSX: "readonly",
+  },
   extends: ["plugin:react/recommended", "standard", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -19,5 +22,6 @@ module.exports = {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/triple-slash-reference": "off",
+    "no-void": "off",
   },
 };
