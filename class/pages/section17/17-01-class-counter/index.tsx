@@ -21,7 +21,7 @@ export default class ClassCounterPage extends Component {
   //     // });
   //   }
   onClickCountUp = (): void => {
-    console.log(this.state.count); // 에러 발생. this 의 성질을 이해할 필요가 있음
+    console.log(this.state.count);
     this.setState({
       count: 1,
     });
