@@ -15,7 +15,7 @@ export default class ClassCounterPage extends Component {
   }
 
   componentWillUnmount(): void {
-    console.log("사라지고 나서 실행!!");
+    console.log("사라지기 전에 실행!!");
   }
 
   onClickCountUp = (): void => {
