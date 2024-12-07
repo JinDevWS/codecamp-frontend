@@ -2,7 +2,7 @@ import { useQuery, gql } from "@apollo/client";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
-} from "../../../src/commons/types/generated/types";
+} from "../../../src/commons/types/generated/types.js";
 import { MouseEvent, useState } from "react";
 
 const FETCH_BOARDS = gql`

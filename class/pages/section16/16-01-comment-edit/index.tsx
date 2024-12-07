@@ -3,7 +3,7 @@ import { MouseEvent, useState } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
-} from "../../../src/commons/types/generated/types";
+} from "../../../src/commons/types/generated/types.js";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {

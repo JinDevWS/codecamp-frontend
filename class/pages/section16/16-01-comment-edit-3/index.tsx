@@ -2,8 +2,8 @@ import { useQuery, gql } from "@apollo/client";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
-} from "../../../src/commons/types/generated/types";
-import CommentItem from "../../../src/components/units/16-comment-item";
+} from "../../../src/commons/types/generated/types.js";
+import CommentItem from "../../../src/components/units/16-comment-item/index.jsx";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {

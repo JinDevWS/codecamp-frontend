@@ -2,8 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import {
   IMutation,
   IMutationCreateBoardArgs,
-} from "../../../src/commons/types/generated/types";
-import { useState } from "react";
+} from "../../../src/commons/types/generated/types.js";
 
 const 나의그래프큐엘셋팅 = gql`
   mutation createBoard($writer: String, $title: String, $contents: String) {

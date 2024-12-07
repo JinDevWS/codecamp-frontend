@@ -1,9 +1,9 @@
 import { useQuery, gql } from "@apollo/client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router.js";
 import {
   IQuery,
   IQueryFetchBoardArgs,
-} from "../../../src/commons/types/generated/types";
+} from "../../../src/commons/types/generated/types.js";
 
 const FETCH_BOARD = gql`
   query fetchBoard($number: Int) {
@@ -24,7 +24,7 @@ export default function staticRoutingMovedPage() {
     FETCH_BOARD,
     {
       variables: { number: Number(router.query.aaa) },
-    }
+    },
   );
 
   console.log(data);
