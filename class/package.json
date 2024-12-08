@@ -23,17 +23,20 @@
     "axios": "^1.7.7",
     "firebase": "^11.0.2",
     "graphql": "^16.9.0",
+    "lodash": "^4.17.21",
     "next": "12.1.0",
     "react": "17",
     "react-daum-postcode": "^3.1.3",
     "react-dom": "17",
     "react-infinite-scroller": "^1.2.6",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
   },
   "type": "module",
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/typescript": "^4.1.1",
+    "@types/lodash": "^4.17.13",
     "@types/react": "17.0.2",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
@@ -47,8 +50,7 @@
     "eslint-plugin-react": "^7.37.2",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
-    "prettier": "3.3.3",
-    "typescript": "4.9"
+    "prettier": "3.3.3"
   },
   "resolutions": {
     "@types/react": "17.0.2",
