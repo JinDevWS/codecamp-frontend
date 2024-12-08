@@ -4,6 +4,7 @@ import Layout from "../src/components/commons/layout";
 import ApolloSetting from "../src/components/commons/apollo";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
+import { RecoilRoot } from "recoil";
 
 export default function App({ Component }: AppProps) {
   // app.tsx 파일이 설정파일이기는 하지만, 여기에 관련 내용 계속 추가하면 너무 복잡해짐.
@@ -26,14 +27,17 @@ export default function App({ Component }: AppProps) {
       {/* <영희라이브러리> */}
       {/* <철수라이브러리> */}
       {/* <ApolloProvider client={client}> */}
-      <ApolloSetting>
-        <>
-          <Global styles={globalStyles} />
-          <Layout>
-            <Component />
-          </Layout>
-        </>
-      </ApolloSetting>
+      {/* 이 <RecoilRoot> </RecoilRoot> 안에 있는 것들은 다 글로벌 스테이트 공유 가능 */}
+      <RecoilRoot>
+        <ApolloSetting>
+          <>
+            <Global styles={globalStyles} />
+            <Layout>
+              <Component />
+            </Layout>
+          </>
+        </ApolloSetting>
+      </RecoilRoot>
       {/* </ApolloProvider> */}
       {/* </철수라이브러리> */}
       {/* </영희라이브러리> */}
