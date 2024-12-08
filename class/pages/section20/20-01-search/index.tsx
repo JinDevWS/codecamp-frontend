@@ -26,6 +26,7 @@ export default function staticRoutingMovedPage(): JSX.Element {
   >(FETCH_BOARDS);
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>): void => {
+    // 검색해서 refetch할 때, search 검색어가 refetch 에 이미 저장되어 있는 상태이므로 추가로 search 포함하지 않아도 됨
     void refetch({ page: Number(event.currentTarget.id) });
   };
 
