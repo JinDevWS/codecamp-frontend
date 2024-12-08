@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { ChangeEvent, useRef, useState } from "react";
 import { IMutation } from "../../../src/commons/types/generated/types.js";
+import { checkValidationFile } from "../../../src/commons/libraries/validation.ts";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -23,6 +24,9 @@ export default function ImageUploadPage(): JSX.Element {
     // 옵셔녈 체이닝 활용
     const file = event.target.files?.[0];
     console.log(file);
+
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
 
     const result = await uploadFile({
       variables: { file },
@@ -49,6 +53,7 @@ export default function ImageUploadPage(): JSX.Element {
         type="file"
         onChange={onChangeFile}
         ref={fileRef}
+        accept="image/jpeg,image/png"
       />
       <img src={`http://storage.googleapis.com/${imageUrl}`} />
     </>
