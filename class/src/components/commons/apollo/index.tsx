@@ -6,6 +6,8 @@ import {
 } from "@apollo/client";
 
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { accessTokenState } from "../../../commons/stores";
+import { useRecoilState } from "recoil";
 // import formDataAppendFile from "apollo-upload-client/formDataAppendFile.mjs";
 // import isExtractableFile from "apollo-upload-client/isExtractableFile.mjs";
 
@@ -17,8 +19,13 @@ interface IApolloSettingProps {
 }
 
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
+  const [accessToken] = useRecoilState(accessTokenState);
+
   const uploadLink = createUploadLink({
     uri: "http://backend-practice.codebootcamp.co.kr/graphql", // 심화연습용
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
 
   const client = new ApolloClient({
