@@ -23,5 +23,6 @@ module.exports = {
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/triple-slash-reference": "off",
     "no-void": "off",
+    "react/display-name": "off",
   },
 };
