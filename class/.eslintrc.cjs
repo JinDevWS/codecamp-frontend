@@ -18,10 +18,9 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/triple-slash-reference": "off",
+    // "@typescript-eslint/explicit-function-return-type": "off",
+    // "@typescript-eslint/strict-boolean-expressions": "off",
+    // "@typescript-eslint/triple-slash-reference": "off",
     "no-void": "off",
     "react/display-name": "off",
   },
