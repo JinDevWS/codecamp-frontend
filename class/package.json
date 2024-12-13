@@ -15,6 +15,7 @@
     "@apollo/client": "^3.11.5",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@hookform/resolvers": "^3.9.1",
     "@types/node": "^22.10.1",
     "@types/react-dom": "17",
     "@types/react-infinite-scroller": "^1.2.5",
@@ -33,7 +34,8 @@
     "recoil": "^0.7.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "yup": "^1.5.0"
   },
   "type": "module",
   "devDependencies": {
