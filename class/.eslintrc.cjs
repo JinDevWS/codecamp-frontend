@@ -24,5 +24,6 @@ module.exports = {
     "no-void": "off",
     "react/display-name": "off",
     "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
   },
 };
