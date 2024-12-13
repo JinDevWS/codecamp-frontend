@@ -1,0 +1,50 @@
+function useState(초기값) {
+    let state = 초기값
+
+    const setState = (변경값) => {
+        console.log(`${state}에서 ${변경값}으로 값을 변경하였습니다!!`); // 1. state 변경하기
+        console.log(`변경된 ${변경값}을 사용해서 컴포넌트를 리렌더링 하겠습니다!!`); // 2. 해당 컴포넌트를 리렌더링 시키기(render 함수)
+    }
+    
+    return [state, setState]
+}
+undefined
+const [count, setCount] = useState(0)
+undefined
+const [count, setCount] = useState(10);
+undefined
+count
+10
+setCount(5)
+VM1223:5 10에서 5으로 값을 변경하였습니다!!
+VM1223:6 변경된 5을 사용해서 컴포넌트를 리렌더링 하겠습니다!!
+undefined
+function useState(초기값) {
+    let state = 초기값
+
+    const setState = (변경값) => {
+        state = 변경값 // 이런다고 실제 값이 바뀌지는 않는다.
+        console.log(`${state}에서 ${변경값}으로 값을 변경하였습니다!!`); // 1. state 변경하기
+        console.log(`변경된 ${변경값}을 사용해서 컴포넌트를 리렌더링 하겠습니다!!`); // 2. 해당 컴포넌트를 리렌더링 시키기(render 함수)
+    }
+    
+    return [state, setState]
+}
+undefined
+const [count, setCount] = useState(0);
+undefined
+count
+0
+setCount(5)
+VM1435:6 5에서 5으로 값을 변경하였습니다!!
+VM1435:7 변경된 5을 사용해서 컴포넌트를 리렌더링 하겠습니다!!
+undefined
+count
+0
+???!?!?!? setCount(5)를 했는데 잘 변경된 줄 알았는데 count 다시 찍어보니 0이다. 즉, 바뀌지 않았다!
+
+이제 컴포넌트가 리렌더링 되면서 const [count, setCount] = useState(0) 이 부분을 다시 실행한다.
+
+그 다시 실행될 때 변경되어 있는 그 값(5)을 새로 count 로 뽑아오기 때문에 5로 바뀌게 된다. 리액트 에서는. 그런데 지금은 리렌더링까지는 구현이 안 되어있어서 바뀌지가 않는 것이다.
+
+핵심 원리는 위의 코드까지만 알면 충분하다.

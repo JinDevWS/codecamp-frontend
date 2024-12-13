@@ -1,0 +1,29 @@
+function useQuery(qqq) {
+    // qqq API 요청하기
+
+    return {
+        data: {fetchBoard: {writer: "철수"}},
+        refetch: () => {
+            console.log("리페치가 실행됩니다!!");
+        }
+    }
+}
+undefined
+const {data, refetch} = useQuery("FETCH_BOARD")
+undefined
+data.fetchBoard.writer
+'철수'
+refetch()
+VM353:7 리페치가 실행됩니다!!
+undefined
+const result = useQuery("FETCH_BOARD")
+undefined
+result.data.fetchBoard.writer
+'철수'
+result.refetch()
+VM353:7 리페치가 실행됩니다!!
+undefined
+
+// 즉, 구조분해할당을 왜 해주냐?
+// 편리성. 보기 편하고 쓰기 편하라고.
+// 그래서 꼭 구조분해할당을 쓸 필요는 없다는 것을 보여주기 위해 이 코드를 개발자도구에서 실험하고 txt파일로 저장해 보았다.
