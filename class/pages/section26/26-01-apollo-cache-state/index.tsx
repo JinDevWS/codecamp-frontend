@@ -27,7 +27,7 @@ const 나의그래프큐엘셋팅 = gql`
 `;
 
 const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID) {
+  mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
   }
 `;
