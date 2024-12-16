@@ -1,0 +1,135 @@
+<!-- `http://numberapi.com/random?min=1&max=200` -->
+<!-- `https://koreanjson.com/posts/${num}` -->
+<!-- `https://koreanjson.com/posts?userId=${userId}` -->
+
+<!doctype html>
+<html lang="ko">
+    <head>
+        <title>콜백과 친구들</title>
+        <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+        <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+        <script>
+            // 1. 랜덤한 숫자 받아오기(1~200)
+            // 2. 70번 게시글 조회
+            // 3. 작성자가 작성한 다른 게시글 가져오기
+
+            // 실제 이렇게 되어 있지 않지만, 만든다면 이런 식일 것이다.
+            //   function addEventListener(aaa, bbb) {
+            //     // 셋팅된 API 주소로 요청!!
+            //     const res = 70; // 셋팅된 API 주소로부터 받아온 결과
+
+            //     if (aaa === "load") {
+            //       bbb(res);
+            //     }
+            //   }
+
+            // Axios 가 없던 시절 - 콜백 활용
+            const myCallback = () => {
+                const aa = new XMLHttpRequest();
+                aa.open("get", `http://numberapi.com/random?min=1&max=200`);
+                aa.send();
+                aa.addEventListener("load", (res) => {
+                    console.log(res); // API 요청 결과
+                    const num = res.target.response.split(" ")[0]; // 70(랜덤 숫자)
+
+                    const bb = new XMLHttpRequest();
+                    bb.open("get", `https://koreanjson.com/posts/${num}`);
+                    bb.send();
+                    bb.addEventListener("load", (res) => {
+                        console.log(res); // API 요청 결과
+                        const userId = JSON.parse(res.target.response.UserId); // 8(작성자 ID)
+
+                        const cc = new XMLHttpRequest();
+                        cc.open("get", `https://koreanjson.com/posts?userId=${userId}`);
+                        cc.send();
+                        cc.addEventListener("load", (res) => {
+                            console.log(res); // 최종 API 요청 결과
+                            // 콜백 지옥!! 유지보수에 좋지 못하다...
+                        });
+                    });
+                });
+            };
+
+            // 프로미스 의 기본 구조는 다음과 같다.
+            // new Promise((성공했을때실행시킬함수, 실패했을때실행시킬함수) => {
+            //     try {
+            //         // 여기서 API 요청을 한다면??
+            //         const response = "철수"; // 백엔드에서 철수 데이터 받아옴
+            //         성공했을때실행시킬함수(response);
+            //     } catch (error) {
+            //         실패했을때실행시킬함수("실패했습니다!!");
+            //     }
+            // })
+            //     .then((qqq) => {
+            //         // 성공했을때실행시킬함수() 를 실행시키게 되면 .then()이게 실행되는 것임
+            //         console.log(qqq); // 철수
+            //     })
+            //     .catch((rrr) => {
+            //         // 실패했을때실행시킬함수() 를 실행시키게 되면 .catch()이게 실행되는 것임
+            //         console.log(rrr); // 실패했습니다!!
+            //     });
+
+            // Promise - 콜백 지옥의 해결??
+            // 프로미스 체이닝 활용하기! (직관적)
+            // 1 5 2 3 4 의 실행 순서를 보인다. 왜 그럴까??
+            // 아무튼 명확하지 못하고 직관적이지 못하다...!
+            const myPromise = () => {
+                console.log("1번째로 실행됩니다.");
+                axios
+                    .get(`http://numberapi.com/random?min=1&max=200`)
+                    .then((qqq) => {
+                        console.log("2번째로 실행됩니다.");
+                        return axios.get(`http://numberapi.com/random?min=1&max=200`);
+                    })
+                    .then((qqq) => {
+                        console.log("3번째로 실행됩니다.");
+                        return axios.get(`http://numberapi.com/random?min=1&max=200`);
+                    })
+                    .then((qqq) => {
+                        console.log("4번째로 실행됩니다.");
+                        console.log(qqq); // qqq: 최종 결과
+                    });
+                console.log("5번째로 실행됩니다.");
+            };
+
+            // Axios 의 기본구조는 다음과 같다.
+            // const axios = {
+            //     get: () => {
+            //         return new Promise((성공시, 실패시) => {});
+            //     },
+            //     post: () => {
+            //         return new Promise((성공시, 실패시) => {});
+            //     },
+            // };
+
+            // Axios - 프로미스로 만들어짐.
+            // 엑시오스, fetch 등 --> 대표적인 프로미스 사용하는 기능
+            // 이런 것들을 기다리는 2가지 방법
+            // 1. .then() 활용
+            // 2. await 활용
+            const myAsyncAwait = async () => {
+                // axios.get(). // 입력 시 숏컷으로 then 과 catch 가 나오는 것을 볼 수 있다.
+                // async, await 가 없던 시절에는 axios 자체가 promise 를 지원해주는 기능이라서
+                // .then() 해서 여기서 결과를 받아서 사용했다.
+                // axios.get().then((res) => {});
+                // 요즘에 만든 api 요청 도구들은 다 promise 기반이다.
+                // 마우스 올리면 다 프로미스 리턴하는 거 볼수있고, .then, .catch 붙일 수 있다.
+                // 프로미스는 앞에는 await 붙일 수도 있다.
+                // 다시 말하면,
+                // await를 아무데나 갖다 붙인다고 다 기다려지는 것이 아니라,
+                // Promise 에 갖다붙여야 기다려지는 것이다.
+                //
+                // 실행 순서 명확, 직관적, 간단함.
+                // 실행 끝날때까지 순서대로 기다렸다 실행해!
+                await axios.get(`http://numberapi.com/random?min=1&max=200`);
+                await axios.get(`http://numberapi.com/random?min=1&max=200`);
+                await axios.get(`http://numberapi.com/random?min=1&max=200`);
+            };
+        </script>
+    </head>
+    <body>
+        <button onclick="myCallback()">Callback 연습하기</button>
+        <button onclick="myPromise()">Promise 연습하기</button>
+        <button onclick="myAsyncAwait()">AsyncAwait 연습하기</button>
+    </body>
+</html>
