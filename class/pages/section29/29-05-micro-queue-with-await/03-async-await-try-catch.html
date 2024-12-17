@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>이벤트루프</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      // // 1) Promise인 axios가 마이크로큐에 들어가고 try는 정상 종료. onClickCatchFail 함수도 정상 종료.
+      // // 2) 마이크로큐에 있던 axios가 콜스택으로 돌아왔을 때 try-catch는 아까 정상 종료되었으므로 실패해도 못잡음
+      const onClickCatchFail = () => {
+        try {
+          axios.get("https://qqqqq.com");
+          console.log("철수"); // 로그까지 찍고, aaa 함수 정상 종료
+        } catch (error) {
+          console.log("에러가 발생하였습니다!");
+        }
+      };
+
+      // 1) Promise인 axios가 마이크로큐에 들어감. onClickCatchSuccess 함수도 await를 만나서 마이크로큐에 들어감.
+      // 2) 마이크로큐에 있던 axios가 콜스택으로 돌아왔을 때 try-catch가 포함된 onClickCatchSuccess 함수도 다음 마이크로큐에서 대기중이므로 실패하면 잡힘
+      const onClickCatchSuccess = async () => {
+        try {
+          await axios.get("https://qqqqq.com");
+          console.log("철수");
+        } catch (error) {
+          console.log("에러가 발생하였습니다!");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickCatchFail()">에러 못잡음</button>
+    <button onclick="onClickCatchSuccess()">에러 잡음</button>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+console.log("=======시작!!!!=======");
+console.log("aaa-시작");
+console.log("bbb-시작");
+console.log("ccc-시작");
+
+console.log("aaa-끝");
+console.log("=======끝!!!!=======");
+
+console.log("bbb-끝");
+
+console.log(friend); // "철수"
+
+
+맞나???
+
+
+=======시작!!!!=======
+aaa-시작
+bbb-시작
+ccc-시작
+aaa-끝
+=======끝!!!!=======
+철수
+bbb-끝
+
+
+틀림...
+
+철수 가 먼저 실행된다.
