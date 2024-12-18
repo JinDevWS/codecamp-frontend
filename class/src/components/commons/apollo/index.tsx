@@ -120,6 +120,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
     link: ApolloLink.from([errorLink, uploadLink]),
     // cache: new InMemoryCache(), // 컴 메모리에 백엔드에서 가져온 데이터 저장
     cache: GLOBAL_STATE, // 페이지 이동 시마다 캐시 new 안 되게 방어해 줌
+    connectToDevTools: true,
   });
 
   // prettier-ignore
