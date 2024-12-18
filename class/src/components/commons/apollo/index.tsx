@@ -23,7 +23,7 @@ interface IApolloSettingProps {
 }
 
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
-  const [accessToken, setAcessToken] = useRecoilState(accessTokenState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   // localstorage is not defined 에러 발생!!
   // Next.js의 렌더링 방식을 이해할 필요가 있다.
@@ -35,7 +35,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   //   console.log("나는 지금 브라우저다!!!");
   //   const result = localStorage.getItem("accessToken");
   //   console.log(result);
-  //   setAcessToken(result ?? "");
+  //   setAccessToken(result ?? "");
   // } else {
   //   console.log(
   //     "지금은 프론트엔드 서버다!!! 즉, yarn dev 해준 실행프로그램 내부이다!!",
@@ -57,7 +57,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
     console.log("나는 지금 브라우저다!!");
     const result = localStorage.getItem("accessToken");
     console.log(result);
-    setAcessToken(result ?? "");
+    setAccessToken(result ?? "");
   }, []);
 
   // 로그인 만료 시 에러 캐치해서 리프레쉬토큰 받아올 수 있도록 하자!
@@ -74,7 +74,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
           return fromPromise(
             // 2. refreshToken 으로 accessToken 을 재발급 받기
             getAccessToken().then((newAccessToken) => {
-              setAcessToken(newAccessToken ?? "");
+              setAccessToken(newAccessToken ?? "");
 
               // 3. 재발급 받은 accessToken으로 발급 실패한 쿼리 재요청 하기
               // .getContext(): 방금 실패한 쿼리(operation) 에서 헤더, 리퀘스트, 리스판스 정보 등을 그대로 가져오는 명령어
