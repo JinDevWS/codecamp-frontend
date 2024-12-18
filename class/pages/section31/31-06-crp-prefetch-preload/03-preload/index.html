@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- 
+    다운로드 순서: 
+        index.html
+        index.css
+        index1.js
+        index2.js
+        index3.js
+        index4.js
+        index5.js
+        index6.js
+        dark_magic_animal_1.png
+    
+    이거를 좀 효율적으로 할 수 없을까?
+
+    이미지를 먼저 다운로드 받게끔 하고, 나머지는 이미지 다운 될 동안 다운받아지는 좀 그렇게 할 수 있을까?
+
+    프리로드 해준 후 다운로드 순서:
+        index.html
+        dark_magic_animal_1.png
+        index.css
+        index1.js
+        index2.js
+        index3.js
+        index4.js
+        index5.js
+        index6.js
+
+    이런 식으로 다운로드 순서를 제어해 줄 수 있다.
+    전체 다운로드 시간이 좀 더 짧아진다.
+
+    [주의]
+    프리페치는 이 경우 사용해선 안 됨.
+    왜냐?
+    프리페치는 다음 페이지를 위한 다운로드이다.
+    이미 이 페이지 내에서 다운로드된 이미지를 보여줄 필요가 있기 때문에 하면 안됨!!
+    그리고 두 번 다운받게 되는 문제가 생긴다.
+
+    프리페치는 다음 페이지를 위한 다운로드라, 맨 마지막에 다운받게 된다.
+    이미 순서를 윗순서로 땡겨서 받고, 또 마지막에 한 번 더 다운받게 되므로
+    프리페치 사용하면 좋지 않음.
+
+    disable-cache 를 체크해제해야 성능이 더 좋다.
+    disable-cache 를 체크하면, 캐시 안 쓰고 매번 새로 다운받겠다는 뜻이다.
+
+    -->
+    <title>프리로드</title>
+
+    <!-- 여기서 이미지 프리로드 해 준다. 여기서부터, -->
+    <link rel="preload" as="image" href="./dark_magic_animal_1.png" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index1.js"></script>
+    <script src="./index2.js"></script>
+    <script src="./index3.js"></script>
+    <script src="./index4.js"></script>
+    <!-- 여기까지, 위에서부터 6개 요청 나감. -->
+    <script src="./index5.js"></script>
+    <script src="./index6.js"></script>
+  </head>
+  <body>
+    <img src="./dark_magic_animal_1.png" />
+  </body>
+</html>
