@@ -7,8 +7,11 @@ import {
 } from "@apollo/client";
 
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
-import { accessTokenState } from "../../../commons/stores";
-import { useRecoilState } from "recoil";
+import {
+  accessTokenState,
+  restoreAccessTokenLoadable,
+} from "../../../commons/stores";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { useEffect } from "react";
 import { onError } from "@apollo/client/link/error";
 import { getAccessToken } from "../../../commons/libraries/getAccessToken";
@@ -24,6 +27,7 @@ interface IApolloSettingProps {
 
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const aaa = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
   // localstorage is not defined 에러 발생!!
   // Next.js의 렌더링 방식을 이해할 필요가 있다.
@@ -54,10 +58,16 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
 
   // 3. 프리렌더링 무시 - useEffect 사용하는 방법 (일반적, 제일 깔끔)
   useEffect(() => {
-    console.log("나는 지금 브라우저다!!");
-    const result = localStorage.getItem("accessToken");
-    console.log(result);
-    setAccessToken(result ?? "");
+    // console.log("나는 지금 브라우저다!!");
+
+    // 1. 기존 방식 (refreshToken 이전)
+    // const result = localStorage.getItem("accessToken");
+    // setAccessToken(result ?? "");
+
+    // 2. 새로운 방식(refreshToken 이용)
+    aaa.toPromise().then((newAccessToken) => {
+      setAccessToken(newAccessToken ?? "");
+    });
   }, []);
 
   // 로그인 만료 시 에러 캐치해서 리프레쉬토큰 받아올 수 있도록 하자!
