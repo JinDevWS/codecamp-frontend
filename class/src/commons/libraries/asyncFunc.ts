@@ -30,11 +30,22 @@ export const wrapAsync =
     void asyncFunc(event);
   };
 
+// // Form 에서 Submit 할 때 작동되는 함수를 감싸주는 함수
+// export const wrapFormAsync =
+//   (asyncFunc: (event: FormEvent<HTMLElement>) => Promise<void>) =>
+//   (event: FormEvent<HTMLElement>) => {
+//     // onSubmit 시 기본적으로 동작되는, 어느 (백엔드 페이지로 추정되는) 엉뚱한 주소로 이동하는 것을 방지
+//     event.preventDefault();
+
+//     void asyncFunc(event);
+//   };
+
 // Form 에서 Submit 할 때 작동되는 함수를 감싸주는 함수
 export const wrapFormAsync =
-  (asyncFunc: () => Promise<void>) => (event: FormEvent<HTMLElement>) => {
+  (asyncFunc: (event: FormEvent<HTMLElement>) => Promise<void>) =>
+  (event: FormEvent<HTMLElement>) => {
     // onSubmit 시 기본적으로 동작되는, 어느 (백엔드 페이지로 추정되는) 엉뚱한 주소로 이동하는 것을 방지
     event.preventDefault();
 
-    void asyncFunc();
+    void asyncFunc(event);
   };
