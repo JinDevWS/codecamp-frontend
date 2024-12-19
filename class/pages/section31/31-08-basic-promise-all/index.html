@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>Promise.all 연습</title>
+    <script>
+      const startPromise = async () => {
+        console.time("=== 개별 Promise 각각 ===");
+        const result1 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공1");
+          }, 2000);
+        });
+        const result2 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공2");
+          }, 3000);
+        });
+        const result3 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공3");
+          }, 1000);
+        });
+
+        const results = [result1, result2, result3];
+        console.log(results);
+        console.timeEnd("=== 개별 Promise 각각 ===");
+      };
+
+      const startPromiseAll = async () => {
+        // await Promise.all([promise, promise, promise]);
+
+        console.time("=== 한방 Promise.all ===");
+        // Promise 를 전부 동시에 스타트 하고, 모두다 끝날 때까지 all에서 빠져나가지 않게 함.
+        const results = await Promise.all([
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공1");
+            }, 2000);
+          }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공2");
+            }, 3000);
+          }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공3");
+            }, 1000);
+          }),
+        ]);
+        console.log(results);
+        console.timeEnd("=== 한방 Promise.all ===");
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="startPromise()">Promise 연습하기</button>
+    <button onclick="startPromiseAll()">Promise.all 연습하기</button>
+  </body>
+</html>
