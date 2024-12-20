@@ -6,7 +6,8 @@ import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import { RecoilRoot } from "recoil";
 
-export default function App({ Component }: AppProps) {
+// pageProps: 서버 사이드 렌더링할 때 필요
+export default function App({ Component, pageProps }: AppProps) {
   // app.tsx 파일이 설정파일이기는 하지만, 여기에 관련 내용 계속 추가하면 너무 복잡해짐.
   // 아래와 같이 계속 추가되면서 복잡해진다.
   // 그래서 여기 들어갈 설정들도 따로 분리를 시켜주는 게 좋다.
@@ -33,7 +34,8 @@ export default function App({ Component }: AppProps) {
           <>
             <Global styles={globalStyles} />
             <Layout>
-              <Component />
+              {/* {...pageProps}: 서버 사이드 렌더링할 때 필요 */}
+              <Component {...pageProps} />
             </Layout>
           </>
         </ApolloSetting>
